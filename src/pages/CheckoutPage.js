@@ -29,6 +29,28 @@ const products = [
   },
   // More products...
 ];
+const people = [
+  {
+    name: "Leslie Alexander",
+    street: "Tulip Apartments",
+    city: "New Delhi",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    pinCode: "110001",
+    state: "delhi",
+    phone: "1234566789",
+  },
+  {
+    name: "Michael Foster",
+    street: "Sansad Apartments",
+    city: "New Delhi",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    pinCode: "110001",
+    state: "delhi",
+    phone: "1234566789",
+  },
+];
 export function CartPage() {
   const [open, setOpen] = useState(true);
   return (
@@ -38,8 +60,8 @@ export function CartPage() {
           <div className="lg:col-span-3">
             <form className="bg-white px-5">
               <div className="space-y-12">
-                <div className="border-b border-gray-900/10 pb-12">
-                  <h2 className="text-base font-semibold leading-7 text-gray-900">
+                <div className="border-b border-gray-900/10 pb-12 mt-12">
+                  <h2 className="text-2xl px-5 py-12 font-semibold leading-7 text-gray-900">
                     Personal Information
                   </h2>
                   <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -195,6 +217,20 @@ export function CartPage() {
                     </div>
                   </div>
                 </div>
+                <div className="mt-6 flex items-center justify-end gap-x-6">
+                  <button
+                    type="button"
+                    className="text-sm font-semibold leading-6 text-gray-900"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    type="submit"
+                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Add Address
+                  </button>
+                </div>
 
                 <div className="border-b border-gray-900/10 pb-12">
                   <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -203,6 +239,50 @@ export function CartPage() {
                   <p className="mt-1 text-sm leading-6 text-gray-600">
                     Choose from existing Addresses
                   </p>
+                  <ul role="list">
+                    {people.map((person) => (
+                      <li
+                        key={person.street}
+                        className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
+                      >
+                        <div className="flex min-w-0 gap-x-4">
+                          <input
+                            name="address"
+                            id="payment"
+                            type="radio"
+                            className="h-4 w-4 border-gray-300 text-indigo-600  focus:ring-indigo-600"
+                          />
+                          <div className="min-w-0 flex-auto">
+                            <p className="text-sm font-semibold leading-6 text-gray-900">
+                              {person.name}
+                            </p>
+                            <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                              {person.street}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                          <p className="text-sm leading-6 text-gray-900">
+                            {person.city}
+                          </p>
+                          {person.pinCode ? (
+                            <p className="mt-1 text-xs leading-5 text-gray-500">
+                              {person.pinCode}
+                            </p>
+                          ) : (
+                            <div className="mt-1 flex items-center gap-x-1.5">
+                              <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                              </div>
+                              <p className="text-xs leading-5 text-gray-500">
+                                Online
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
 
                   <div className="mt-10 space-y-10">
                     <fieldset>
@@ -235,7 +315,7 @@ export function CartPage() {
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           />
                           <label
-                            htmlFor="push-email"
+                            htmlFor="card"
                             className="block text-sm font-medium leading-6 text-gray-900"
                           >
                             card Payment
@@ -246,25 +326,10 @@ export function CartPage() {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                  type="button"
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Save
-                </button>
-              </div>
             </form>
           </div>
           <div className="lg:col-span-2">
-            <div className="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto mt-12 bg-white max-w-7xl px-0 sm:px-0 lg:px-8">
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                 <h1 className="text-4xl my-5 font-bold tracking-tight text-gray-900">
                   Cart
@@ -333,12 +398,12 @@ export function CartPage() {
                   Shipping and taxes calculated at checkout.
                 </p>
                 <div className="mt-6">
-                  <a
-                    href="#"
+                  <Link
+                    to="/payment"
                     className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   >
-                    Checkout
-                  </a>
+                    Place order
+                  </Link>
                 </div>
                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                   <p>

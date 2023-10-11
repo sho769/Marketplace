@@ -35,7 +35,6 @@ const products = [
 ];
 export function Cart() {
   const [open, setOpen] = useState(true);
-  const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
   return (
